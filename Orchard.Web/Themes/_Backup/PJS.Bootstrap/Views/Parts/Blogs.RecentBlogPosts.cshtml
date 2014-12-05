@@ -1,0 +1,45 @@
+﻿@using Orchard.ContentManagement;
+@using Orchard.Blogs.Models;
+
+@{
+    IEnumerable<object> blogPosts = Model.ContentItems.ContentItems;
+}
+
+@if (blogPosts == null || blogPosts.Count() < 1) {
+    <p>@T("No posts.")</p>
+}
+else {
+    <ul class="recent-posts">
+        @foreach (dynamic post in blogPosts) {
+            string title = post.Title;
+            DateTime date = post.ContentItem.CommonPart.CreatedUtc;
+            ContentItem contentItem = post.ContentItem;
+            var blogPostPart = contentItem.As<BlogPostPart>();
+
+            string bodyHtml = blogPostPart.Text.ToString();
+            var body = new HtmlString(Html.Excerpt(bodyHtml, 70).ToString().Replace(Environment.NewLine, "</p>" + Environment.NewLine + "<p>"));
+
+            var firstIMG = bodyHtml.IndexOf("<img");
+            var firstSlashIMG = bodyHtml.IndexOf("/>", firstIMG >= 0 ? firstIMG : 0);
+
+            if (firstIMG >= 0 && firstSlashIMG > firstIMG) {
+                bodyHtml = bodyHtml.Substring(firstIMG, firstSlashIMG + 2 - firstIMG);
+                bodyHtml = bodyHtml.Replace("<img", "<img class='img-responsive'");
+            }
+
+            var firstImage = new HtmlString(bodyHtml);
+        
+            <li>
+                @if (firstIMG >= 0 && firstSlashIMG > firstIMG) {
+                    <a href="@Url.ItemDisplayUrl(contentItem)">@firstImage</a>
+                }
+                <div>
+                    @Html.ItemDisplayLink(title, contentItem)
+                    <div class="meta">
+                        @date.ToShortDateString()
+                    </div>
+                </div>
+            </li>
+        }
+    </ul>
+}

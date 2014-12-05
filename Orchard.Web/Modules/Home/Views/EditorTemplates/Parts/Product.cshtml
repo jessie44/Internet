@@ -1,0 +1,12 @@
+﻿
+@model Home.Models.HomePart
+<fieldset>
+    <label class="sub" for="Sku">@T("Sku")</label><br />
+    @Html.TextBoxFor(m => m.Name, new  { @class = "text" });
+    <label class="sub" for="PicHref">@T("Price")</label><br />
+    @Html.TextBoxFor(m => m.PicHref, new { @class = "text" })
+    <label class="sub" for="LinkHref">@T("Price")</label><br />
+    @Html.TextBoxFor(m => m.LinkHref, new { @class = "text" })
+    <label class="sub" for="Tooltip">@T("Price")</label><br />
+    @Html.TextAreaFor(m => m.Tooltip, new { @class = "text" })
+</fieldset>

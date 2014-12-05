@@ -1,0 +1,76 @@
+﻿@using PJS.Bootstrap.Services;
+@using Orchard.ContentManagement;
+
+@{ 
+    var settings = WorkContext.Resolve<IThemeSettingsService>().GetSettings();
+
+    var blogPost = Model.ContentItem;
+}
+
+@if (settings.BlogPostLayout == 1) {
+    <div id="blogpost-@blogPost.Id" class="blogpost-1">
+        <div class="center-block text-center">
+            <h3 class="post-title"><a href="@Url.ItemDisplayUrl((IContent)blogPost)">@blogPost.TitlePart.Title</a></h3>
+            <div class="bottomspace30">
+                By <a href="/Search?q=@blogPost.CommonPart.Owner.UserName">@blogPost.CommonPart.Owner.UserName</a> &bull; @blogPost.CommonPart.CreatedUtc.ToString("MMMM d, yyyy") &bull; @Display(Model.Tags)
+            </div>
+        </div>
+        <div>
+            @Display(Model.Summary)
+        </div>
+        <div class="clearfix"></div>
+    </div>
+}
+else if (settings.BlogPostLayout == 2) {
+    <div id="blogpost-@blogPost.Id" class="blogpost-2 bottomspace25">
+        <div class="post-image">
+        </div>
+        <div class="post-content">
+            <h4 class="post-title"><a href="@Url.ItemDisplayUrl((IContent)blogPost)">@blogPost.TitlePart.Title</a></h4>
+            <div class="post-meta">
+                <ul class="post-meta-list">
+                    <li>
+                        Posted on <a href="#">@blogPost.CommonPart.CreatedUtc.ToString("MMMM d, yyyy")</a>
+                    </li>
+                    <li>
+                        By <a href="/Search?q=@blogPost.CommonPart.Owner.UserName">@blogPost.CommonPart.Owner.UserName</a>
+                    </li>
+                    <li>
+                        In @Display(Model.Tags)
+                    </li>
+                </ul>
+            </div>
+            @Display(Model.Summary)
+        </div>
+    </div>
+}
+else if (settings.BlogPostLayout == 3) {
+    <div id="blogpost-@blogPost.Id" class="blogpost-3">
+        <div class="post-image">
+        </div>
+        <div class="post-header">
+            <h3 class="post-title"><a href="@Url.ItemDisplayUrl((IContent)blogPost)">@blogPost.TitlePart.Title</a></h3>
+            <div class="post-meta">
+                <div class="post-meta-date">
+                    <i class="fa fa-clock-o"></i>
+                    @blogPost.CommonPart.CreatedUtc.ToString("MMMM d, yyyy")
+                </div>
+                <div class="post-meta-author">
+                    <i class="fa fa-user"></i>
+                    <a href="/Search?q=@blogPost.CommonPart.Owner.UserName">@blogPost.CommonPart.Owner.UserName</a>
+                </div>
+                <div class="post-tags">
+                    <i class="fa fa-tags"></i>
+                    @Display(Model.Tags)
+                </div>
+                <div class="post-comments">
+                    <i class="fa fa-comments"></i>
+                    @Display(Model.CommentsCount)
+                </div>
+            </div>
+        </div>
+        <div class="post-content">
+            @Display(Model.Summary)
+        </div>
+    </div>
+}

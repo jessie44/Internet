@@ -1,0 +1,48 @@
+﻿@using PJS.Bootstrap.Services;
+
+@{
+    var settings = WorkContext.Resolve<IThemeSettingsService>().GetSettings();
+    
+    string bodyHtml = Model.Html.ToString();
+
+    var firstIMG = bodyHtml.IndexOf("<img");
+    var firstSlashIMG = bodyHtml.IndexOf("/>", firstIMG >= 0 ? firstIMG : 0);
+
+    if (firstIMG >= 0 && firstSlashIMG > firstIMG) {
+        bodyHtml = bodyHtml.Substring(firstIMG, firstSlashIMG + 2 - firstIMG);
+        bodyHtml = bodyHtml.Replace("<img", "<img class=\"img-responsive\"");
+    }
+
+    var firstImage = new HtmlString(bodyHtml);
+
+    bodyHtml = bodyHtml.Replace(" class=\"img-responsive\"", string.Empty);
+    
+    string blogText = Model.Html.ToString();
+    
+    // remove first image from blog text if we're displaying it elsewhere
+    if (settings.BlogPostLayout == 2 || settings.BlogPostLayout == 3) {
+        if (firstIMG >= 0 && firstSlashIMG > firstIMG) {
+            blogText = blogText.Replace(bodyHtml, string.Empty);
+        }
+    }
+    
+    var blogHtml = new HtmlString(blogText);
+}
+
+@if (settings.BlogPostLayout == 2) {
+    if (firstIMG >= 0 && firstSlashIMG > firstIMG) {
+        <script type="text/javascript">
+            $('.post-image').html('@firstImage');
+            $('.post-content').css('border-top-width', '0');
+        </script>
+    }
+}
+else if (settings.BlogPostLayout == 3) {
+    if (firstIMG >= 0 && firstSlashIMG > firstIMG) {
+        <script type="text/javascript">
+            $('.post-image').html('@firstImage');
+        </script>
+    }
+}
+
+@blogHtml

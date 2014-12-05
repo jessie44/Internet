@@ -1,0 +1,52 @@
+﻿@{
+    Style.Include("switcher.css");
+    Script.Include("switcher.js");
+}
+
+<section id="style-switcher">
+    <h2>Style Switcher <a href="#"><i class="fa fa-cog"></i></a></h2>
+    <div>
+        <h3>Swatches</h3>
+        <div class="swatches">
+            <select autocomplete="off" id="swatches">
+                <option value="bootstrap">Default</option>
+                <option value="amelia">Amelia</option>
+                <option value="cerulean">Cerulean</option>
+                <option value="cosmo">Cosmo</option>
+                <option value="cyborg">Cyborg</option>
+                <option value="flatly">Flatly</option>
+                <option value="journal">Journal</option>
+                <option value="readable">Readable</option>
+                <option value="simplex">Simplex</option>
+                <option value="slate">Slate</option>
+                <option value="spacelab">Spacelab</option>
+                <option value="united">United</option>
+                <option value="yeti">Yeti</option>
+            </select>
+        </div>
+        <div class="checkbox fluidlayout">
+            <label>
+                <input type="checkbox" id="fluidlayout" />
+                Use Fluid Layout
+            </label>
+        </div>
+        <div class="checkbox inversenav">
+            <label>
+                <input type="checkbox" id="inversenav" />
+                Use Inverse Navigation Bar Color
+            </label>
+        </div>
+        <div class="checkbox navsearch">
+            <label>
+                <input type="checkbox" id="navsearch" />
+                Use Navigation Bar Search Field
+            </label>
+        </div>
+        <div class="checkbox hovermenus">
+            <label>
+                <input type="checkbox" id="hovermenus" />
+                Enable Hover Menus
+            </label>
+        </div>
+    </div>
+</section>

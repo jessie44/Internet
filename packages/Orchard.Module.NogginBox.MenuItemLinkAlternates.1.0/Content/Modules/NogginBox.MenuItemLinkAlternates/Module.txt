@@ -1,0 +1,11 @@
+﻿Name: MenuItemLink Alternates
+AntiForgery: enabled
+Author: Richard Garside - www.nogginbox.co.uk
+Website: https://bitbucket.org/NogginBox/orchard-menuitemlink-alternatives-module
+Version: 1.0
+OrchardVersion: 1.6
+Category: Designer
+Description: Adds an alternative to MenuItemLink parts that makes them zone aware. Useful if you want to show the same menu item differently based on the zone it's in.
+Features:
+    NogginBox.MenuItemLinkAlternates:
+        Description: Adds an alternative to MenuItemLink parts that makes them zone aware.

@@ -1,0 +1,54 @@
+﻿@using PJS.Bootstrap.Services;
+@using Orchard.ContentManagement;
+
+@*doing excerpt generation on the way out for now so we don't stick ourselves with needing to regen excerpts for existing data
+  also, doing this here, inline, until we have a pluggable processing model (both in and out)
+  also, ...this is ugly *@
+@{ 
+    var settings = WorkContext.Resolve<IThemeSettingsService>().GetSettings();
+
+    var blogPost = Model.ContentItem;
+    
+    string bodyHtml = Model.Html.ToString();
+    var body = new HtmlString(Html.Excerpt(bodyHtml, 500).ToString().Replace(Environment.NewLine, "</p>" + Environment.NewLine + "<p>"));
+
+    var firstIMG = bodyHtml.IndexOf("<img");
+    var firstSlashIMG = bodyHtml.IndexOf("/>", firstIMG >= 0 ? firstIMG : 0);
+
+    if (firstIMG >= 0 && firstSlashIMG > firstIMG) {
+        bodyHtml = bodyHtml.Substring(firstIMG, firstSlashIMG + 2 - firstIMG);
+        
+        if (settings.BlogPostLayout == 1) {
+            bodyHtml = bodyHtml.Replace("<img", "<img class=\"pull-left img-responsive\" style=\"max-width: 180px; margin-right: 10px;\"");
+        }
+        else {
+            bodyHtml = bodyHtml.Replace("<img", "<img class=\"img-responsive\"");
+        }
+    }
+
+    var firstImage = new HtmlString(bodyHtml);
+}
+
+@if (settings.BlogPostLayout == 1) {
+    if (firstIMG >= 0 && firstSlashIMG > firstIMG) {
+        <a href="@Url.ItemDisplayUrl((IContent)blogPost)">@firstImage</a>
+    }
+}
+else if (settings.BlogPostLayout == 2) {
+    if (firstIMG >= 0 && firstSlashIMG > firstIMG) {
+        <script type="text/javascript">
+            $('#blogpost-@blogPost.Id .post-image').html('<a href="@Url.ItemDisplayUrl((IContent)blogPost)">@firstImage</a>');
+            $('#blogpost-@blogPost.Id .post-content').css('border-top-width', '0');
+        </script>
+    }
+}
+else if (settings.BlogPostLayout == 3) {
+    if (firstIMG >= 0 && firstSlashIMG > firstIMG) {
+        <script type="text/javascript">
+            $('#blogpost-@blogPost.Id .post-image').html('<a href="@Url.ItemDisplayUrl((IContent)blogPost)">@firstImage</a>');
+        </script>
+    }
+}
+
+<p>@body</p>
+<a href="@Url.ItemDisplayUrl((IContent)blogPost)" class="btn btn-sm btn-primary">Read more</a>

@@ -1,0 +1,55 @@
+﻿body {
+    background-color: #b0b0b0;
+    color: black;
+}
+/*Not Homepage Side Styles*/
+.menu-side-menu > li {
+    width: 100%;
+}
+
+.navbar {
+    min-height: 80px;
+}
+
+.navbar-nav {
+    margin-top: 15px;
+}
+
+
+/*HomePage CSS Styles*/
+.menu-home-page-menu > li > a {
+    height: 20vh;
+    width: 20vh;
+    padding: 80px 0px 15px;
+    background: -webkit-linear-gradient(180deg, #b4b4b4, #000000 ); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(180deg, #b4b4b4, #000000); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(180deg, #b4b4b4, #000000); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(180deg, #b4b4b4, #000000); /* Standard syntax */
+    margin: 10px;
+    box-shadow: 5px 5px black;
+    border: 2px solid #ffffff;
+    border-radius: 15px;
+    padding-left: 0;
+    text-align: center;
+}
+
+    .menu-home-page-menu > li > a:focus {
+    }
+
+    .menu-home-page-menu > li > a :hover {
+        height: 30vh;
+    }
+
+.menu-d-c-map-menu > li > a {
+    width:140vh;
+    height: 30px;
+    padding:5px;
+    margin: 5px 0;
+    text-align: center;
+    background-color:#212121;
+    border-radius:7px;
+}
+
+table{
+    background: none;
+}

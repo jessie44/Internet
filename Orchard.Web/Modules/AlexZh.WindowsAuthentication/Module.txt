@@ -1,0 +1,13 @@
+Name: AlexZh.WindowsAuthentication
+AntiForgery: enabled
+Author: AlexZh
+Website: http://orchardproject.net
+Version: 1.1
+OrchardVersion: 1.8
+Description: This module allows Windows domain users to be authenticated in Orchard.
+Features:
+    AlexZh.WindowsAuthentication:
+        Name: Windows Authentication
+        Description: This feature allows Windows domain users to be authenticated in Orchard.
+        Category: Authentication
+        Dependencies: Orchard.Users,Orchard.Roles

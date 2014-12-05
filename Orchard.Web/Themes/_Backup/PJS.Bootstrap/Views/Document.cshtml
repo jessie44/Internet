@@ -1,0 +1,58 @@
+@using PJS.Bootstrap.Services;
+@using Orchard.Mvc.Html;
+@using Orchard.UI.Resources;
+@{
+    var settings = WorkContext.Resolve<IThemeSettingsService>().GetSettings();
+
+    RegisterLink(new LinkEntry { Type = "image/x-icon", Rel = "shortcut icon", Href = Url.Content("~/Media/Default/Pictures/favicon.ico") });
+
+    Style.Include(settings.Swatch);
+    Style.Include("bootswatch.min.css");
+    Style.Include("font-awesome.min.css");
+    Style.Include("overwrite.css");
+
+    Script.Require("jQuery").AtHead();
+    Script.Include("bootstrap.min.js");
+    Script.Include("custom.js");
+    if (settings.UseHoverMenu) {
+        Script.Include("hovermenus.js");
+    }
+
+    Script.Include("html5shiv.js").UseCondition("lt IE 9").AtHead();
+    Script.Include("respond.min.js").UseCondition("lt IE 9").AtHead();
+
+    string title = Convert.ToString(Model.Title);
+    string siteName = Convert.ToString(WorkContext.CurrentSite.SiteName);
+  //string  user =  Convert.ToString(@Html.ItemDisplayText(WorkContext.CurrentUser));
+}
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+    <html lang="@WorkContext.CurrentCulture" class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7 static @Html.ClassForPage()">
+<![endif]-->
+<!--[if IE 7]>
+    <html lang="@WorkContext.CurrentCulture" class="no-js lt-ie10 lt-ie9 lt-ie8 static @Html.ClassForPage()">
+<![endif]-->
+<!--[if IE 8]>
+    <html lang="@WorkContext.CurrentCulture" class="no-js lt-ie10 lt-ie9 static @Html.ClassForPage()">
+<![endif]-->
+<!--[if IE 9]>
+    <html lang="@WorkContext.CurrentCulture" class="no-js lt-ie10 static @Html.ClassForPage()">
+<![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="@WorkContext.CurrentCulture" class="no-js static @Html.ClassForPage() swatch-@settings.Swatch.Replace(".min.css", string.Empty) theme-@WorkContext.CurrentTheme.Name" style="@(settings.UseStickyFooter ? "height:100%;" : string.Empty)">
+<!--<![endif]-->
+<head>
+    <link rel="apple-touch-icon" href="@Href(Html.ThemePath(WorkContext.CurrentTheme, "/Content/ico/apple-touch-icon.png"))">
+    <link rel="apple-touch-icon" sizes="72x72" href="@Href(Html.ThemePath(WorkContext.CurrentTheme, "/Content/ico/apple-touch-icon-72.png"))">
+    <link rel="apple-touch-icon" sizes="114x114" href="@Href(Html.ThemePath(WorkContext.CurrentTheme, "/Content/ico/apple-touch-icon-114.png"))">
+    <link rel="apple-touch-icon" sizes="144x144" href="@Href(Html.ThemePath(WorkContext.CurrentTheme, "/Content/ico/apple-touch-icon-144.png"))">
+   <title>@Html.Title(siteName)</title>
+    @Display(Model.Head)
+    <script>(function (d) { d.className = "dyn " + d.className.substring(6, d.className.length); })(document.documentElement);</script>
+</head>
+<body class="@(settings.UseStickyFooter ? "sticky-footer" : string.Empty) @(settings.UseFixedNav ? "fixed-nav" : string.Empty)">
+    @* Layout (template) is in the Body zone @ the default position (nothing, zero, zilch) *@
+    @Display(Model.Body)
+    @Display(Model.Tail)
+</body>
+</html>

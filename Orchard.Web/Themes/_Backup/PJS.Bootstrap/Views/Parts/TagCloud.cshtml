@@ -1,0 +1,9 @@
+﻿@using Vandelay.Industries.Models
+<ul class="categories">
+    @foreach (TagCount tagCount in ((IEnumerable<TagCount>)Model.TagCounts).OrderByDescending(x => x.Count).Take(5)) {
+        <li class="tagCloud-tag tagCloud-@tagCount.Bucket">
+            <i class="fa fa-angle-double-right"></i>&nbsp;@Html.ActionLink(tagCount.TagName, "Search", "Home", new { area = "Orchard.Tags", tagName = tagCount.TagName }, null)
+            <span>(@tagCount.Count)</span>
+        </li>
+    }
+</ul>

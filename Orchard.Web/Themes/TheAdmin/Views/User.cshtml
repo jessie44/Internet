@@ -1,0 +1,2 @@
+﻿@model dynamic
+@if (Model.CurrentUser != null) {<div id="login">@T("User:") @Html.ItemDisplayText((Orchard.ContentManagement.IContent)Model.CurrentUser) </div>}

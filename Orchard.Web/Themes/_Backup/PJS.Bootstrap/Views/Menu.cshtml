@@ -1,0 +1,62 @@
+﻿@using PJS.Bootstrap.Services;
+﻿@using Orchard.Search.ViewModels;
+
+@{
+    var settings = WorkContext.Resolve<IThemeSettingsService>().GetSettings();
+
+    // Model is Model.Menu from the layout (Layout.Menu)
+    Model.Classes.Add(settings.UseFixedNav ? "nav navbar-nav" : "nav nav-pills");
+    var tag = Tag(Model, "ul");
+
+    var items = (IList<dynamic>)Enumerable.Cast<dynamic>(Model.Items);
+
+    if (items.Any()) {
+        items[0].Classes.Add("first");
+        
+        items[items.Count - 1].Classes.Add("last");
+    }
+
+    var searchText = new SearchViewModel();
+    if (Model.ViewModel != null) {
+        searchText = (SearchViewModel)Model.ViewModel;
+    }
+}
+
+@tag.StartElement
+@* see MenuItem shape template *@
+@DisplayChildren(Model)
+
+@if (WorkContext.CurrentUser != null) {
+    dynamic user = WorkContext.CurrentUser.ContentItem;
+ 
+  
+
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span>&nbsp;@Html.ItemDisplayText(WorkContext.CurrentUser)&nbsp;<i class="fa fa-angle-down"></i></a>
+        <ul class="dropdown-menu">
+            
+           
+            @if (AuthorizedFor(Orchard.Security.StandardPermissions.AccessAdminPanel)) {
+                <li>
+                    @Html.ActionLink(T("Dashboard").ToString(), "Index", new { Area = "Dashboard", Controller = "Admin" })
+                </li>
+            }
+        </ul>
+    </li>
+}
+else {
+    <li>
+        <div class="logerror" style="color:red;padding:10px">
+            <p class="naut" style="padding: 5px;">Please Loffgin to a MBM Corporation Computesr.</p>
+        </div>
+    </li>
+}
+@tag.EndElement
+
+@if (settings.UseNavSearch) {
+    using (Html.BeginForm("index", "search", new { area = "Orchard.Search" }, FormMethod.Get, new { @class = "navbar-form navbar-right" })) {
+        <div class="form-group">
+            @Html.TextBox("q", searchText.Query, new { @class = "form-control", placeholder = "Search" })
+        </div>
+    }
+}

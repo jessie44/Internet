@@ -1,0 +1,44 @@
+﻿@model dynamic
+@{ Layout.Title = T("Welcome to Orchard").ToString(); }
+<section class="dashboard group">
+    <h3><b>What Do you want to do?</b></h3>
+    <div class="help-item">
+
+        <h2 class="start">@T("Create A New Page")</h2>
+      
+        
+       <button class="btn btn-info pull-right" style="width: inherit" onclick="location.href='@Url.Action("Create", "Admin", new { area = "Contents", id = "Page" })'">Create New Page</button>
+    </div>
+
+    
+    <div class="help-item">
+        <h2 class="gallery">@T("Change Theme or Add Modules")</h2>
+        
+            <button class="btn btn-info pull-right" style="margin: 5px 0 ;width: inherit" onclick="location.href='@Url.Action("Themes", "Gallery", new { area = "Orchard.Packaging" })'">Change Theme</button>
+             <button class="btn btn-info pull-right" style="margin:5px 0;width: inherit" onclick="location.href='@Url.Action("Modules", "Gallery", new { area = "Orchard.Packaging" })'">Enable or Disable  Modules</button>
+         <button class="btn btn-info pull-right" style="margin:5px 0;width: inherit" onclick="location.href='@Url.Action("PJS.Bootstrap", "Admin")'">Edit Current Theme</button>
+        
+    </div>
+     <div class="help-item">
+        <h2 class="gallery">@T("Edit an existing page")</h2>
+        
+            <button class="btn btn-default pull-right" style="margin: 5px 0 ;width: inherit" onclick="location.href='@Url.Action("List", "Admin", new { area = "Contents", id = "Page" })'">Edit existing Page's </button>
+           
+        
+    </div>
+    <div class="help-item">
+        <h2 class="docs">@T("Need Help? ...Read the Docs")</h2>
+        <p>@T("Are you ready to go deeper and become an Orchard expert? Take a look at the <a href=\"http://docs.orchardproject.net\">Orchard Documentation</a> to learn about how everything connects together and what makes Orchard tick.")</p>
+    </div>
+
+   
+
+
+
+<div class="help-item">
+    <h2 class="advisory">@T("Stay up to date")</h2>
+<iframe id="advisory" src="http://www.orchardproject.net/advisory" frameborder="0" height="100%" width="100%" scrolling="no">
+ <p>@T("Your browser does not support iframes. You can't see advisory messages.")</p>
+</iframe>
+</div>
+</section>

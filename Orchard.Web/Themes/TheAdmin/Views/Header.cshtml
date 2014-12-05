@@ -1,0 +1,10 @@
+﻿@model dynamic
+           
+@{
+    var siteName = WorkContext.CurrentSite.SiteName;
+    var siteLinkText = !string.IsNullOrWhiteSpace(siteName) ? siteName : T("Your site").Text;
+    var appLinkText = !string.IsNullOrWhiteSpace(siteName) ? siteName : T("Project Orchard").Text;
+}
+<div id="branding">
+<div id="" style="margin-left: 15%"><a href="~/"><img src="~/Themes/TheAdmin/Styles/images/mbmlogo.gif" alt="Logo" height="50" /></a></div>
+</div>

@@ -1,0 +1,76 @@
+﻿@{
+    
+    string[] homename = new string[] { "Hello", "Wassup", "doit", "wow", "stop" };
+   
+    
+}
+<style>
+    .square {
+    height:20vh;
+    width:50vh;
+    background-color:#00ff90;
+    box-shadow: #808080 5px 5px ;
+    border-radius: 7px;
+    float:left;
+    margin: 20px;
+    padding:0;
+    color:black;
+    }
+
+        .square:hover {
+
+            box-shadow: #808080 0 0;
+        }
+
+
+    .tops {
+    height:30%;
+    width:inherit;
+    border-radius:7px 7px 0 0;
+    background-color:gray;
+    padding:5px;
+    color:black;
+    }
+    .bottoms {
+    height:70%;
+    text-align:center;
+    padding-top:10px;
+    border-radius:0 0 7px 7px;
+    width:inherit;
+    background-color:#cfcfcf;
+
+    }
+    h3,h4,h5,h6{
+        color:black;
+        text-shadow:20px 12px 4px #333;
+    }
+    .pic{
+        height:100%;
+        width:100%;
+    }
+</style>
+
+<div>
+
+   
+@for (var x = 0; x <= 10; x++)
+{
+
+
+
+    <a href="~/maps">
+        <div class="square">
+            <div class="tops">
+                
+            </div>
+            <div class="bottoms">
+                <h3 style="height: 5vh">DC Maps</h3>
+            </div>
+        </div>
+    </a>
+}            
+            
+
+
+
+</div>

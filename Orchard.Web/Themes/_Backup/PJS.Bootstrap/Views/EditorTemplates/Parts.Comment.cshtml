@@ -1,0 +1,76 @@
+﻿@model Orchard.Comments.Models.CommentPart
+@using PJS.Bootstrap.Services;
+
+@{
+    var settings = WorkContext.Resolve<IThemeSettingsService>().GetSettings();
+}
+
+@if (settings.BlogPostLayout == 1) {
+    if (WorkContext.CurrentUser == null) {
+        @Html.TextBoxFor(m => m.Author, new { @class = "col-md-4", placeholder = "Name (required)" })
+        @Html.TextBoxFor(m => m.Email, new { @class = "col-md-4", placeholder = "Email (required)" })
+        @Html.TextBoxFor(m => m.SiteName, new { @class = "col-md-4", placeholder = "Website" })
+    }
+    else {
+        @Html.Hidden("Name", WorkContext.CurrentUser.UserName ?? "")
+        @Html.Hidden("Email", WorkContext.CurrentUser.Email ?? "")
+    }
+    @Html.TextAreaFor(m => m.CommentText, new { rows = 6, @class = "col-md-12", placeholder = "Comments" })
+    @Html.HiddenFor(m => m.CommentedOn)
+    @Html.HiddenFor(m => m.RepliedOn)
+    <input type="submit" class="btn btn-sm btn-primary" value="Post Comment" />
+}
+else if (settings.BlogPostLayout == 2) {
+    if (WorkContext.CurrentUser == null) {
+        <div class="row">
+            <div class="col-md-4">
+                @Html.TextBoxFor(m => m.Author, new { @class = "form-control", placeholder = "Name (required)" })
+            </div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email (required)" })
+            </div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(m => m.SiteName, new { @class = "form-control", placeholder = "Website" })
+            </div>
+        </div>
+    }
+    else {
+        @Html.Hidden("Name", WorkContext.CurrentUser.UserName ?? "")
+        @Html.Hidden("Email", WorkContext.CurrentUser.Email ?? "")
+    }
+    @Html.TextAreaFor(m => m.CommentText, new { rows = 3, @class = "form-control", placeholder = "Comments" })
+    @Html.HiddenFor(m => m.CommentedOn)
+    @Html.HiddenFor(m => m.RepliedOn)
+    <button type="submit" class="btn btn-sm btn-primary">Post Comment</button>
+}
+else if (settings.BlogPostLayout == 3) {
+    if (WorkContext.CurrentUser == null) {
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <label>Name: <span>*</span></label>
+                @Html.TextBoxFor(m => m.Author, new { @class = "form-control", placeholder = "Name (required)" })
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <label>Email: <span>*</span></label>
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email (required)" })
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <label>Website: </label>
+                @Html.TextBoxFor(m => m.SiteName, new { @class = "form-control", placeholder = "Website" })
+            </div>
+        </div>
+    }
+    else {
+        @Html.Hidden("Name", WorkContext.CurrentUser.UserName ?? "")
+        @Html.Hidden("Email", WorkContext.CurrentUser.Email ?? "")
+    }
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <label>Comments: <span>*</span></label>
+            @Html.TextAreaFor(m => m.CommentText, new { rows = 3, @class = "form-control", placeholder = "Comments" })
+            @Html.HiddenFor(m => m.CommentedOn)
+            @Html.HiddenFor(m => m.RepliedOn)
+        </div>
+    </div>
+    <button type="submit" class="btn btn-sm btn-primary">Post Comment</button>
+}

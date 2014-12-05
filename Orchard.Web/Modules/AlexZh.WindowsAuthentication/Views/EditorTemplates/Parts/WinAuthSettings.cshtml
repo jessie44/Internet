@@ -1,0 +1,34 @@
+﻿@model AlexZh.WindowsAuthentication.ViewModels.WinAuthSettingsPartViewModel
+
+<fieldset>
+	<legend>@T("Windows authentication settings")</legend>
+
+	<div class="editor-field">
+		@Html.CheckBoxFor(model => model.EnableWindowsAuthentication) @T("Enable windows authentication")
+	</div>
+
+	@Html.LabelFor(m => m.EmailDomain, T("E-mail domain"))
+	@Html.TextBoxFor(m=>m.EmailDomain, new { @class = "textMedium" })
+
+	@Html.Label(T("Default roles for new windows users").ToString())
+	@if (Model.Roles.Count > 0) {
+		var index = 0;
+		foreach (var entry in Model.Roles) {
+			if (string.Equals(entry.Name, "Authenticated", StringComparison.OrdinalIgnoreCase) || string.Equals(entry.Name, "Anonymous", StringComparison.OrdinalIgnoreCase)) {
+				continue;
+			}
+
+			@Html.Hidden("Roles[" + index + "].RoleId", entry.RoleId)
+			@Html.Hidden("Roles[" + index + "].Name", entry.Name)
+
+			<div>
+				@Html.CheckBox("Roles[" + index + "].Selected", entry.Selected)
+				<label class="forcheckbox" for="@Html.FieldIdFor(m => m.Roles[index].Selected)">@entry.Name</label>
+			</div>
+			index++;
+		}
+	}
+	else {
+		<p>@T("There are no roles.")</p>
+	}
+</fieldset>

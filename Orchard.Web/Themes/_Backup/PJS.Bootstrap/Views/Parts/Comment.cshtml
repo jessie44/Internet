@@ -1,0 +1,79 @@
+﻿@using PJS.Bootstrap.Services;
+@using Orchard.Comments.Models
+@using Orchard.ContentManagement
+
+@{
+    var settings = WorkContext.Resolve<IThemeSettingsService>().GetSettings();
+    
+    CommentPart comment = Model.ContentPart;
+    CommentsPart comments = comment.CommentedOnContentItem.As<CommentsPart>();
+
+    var children = New.List(Items: Model.Items);
+    children.Classes.Add("comment-list");
+}
+
+@if (settings.BlogPostLayout == 1) {
+    <li id="comment-@comment.Id" class="comment media">
+        <a href="#" class="pull-left">
+            @Display.CommentGravatar(ContentPart: comment)
+        </a>
+        <div class="media-body">
+            <div class="media-content">
+                <h4 class="media-heading">@Display.CommentAuthor(ContentPart: comment)</h4>
+                <div class="comment-meta">
+                    @Display.CommentMetadata(ContentPart: comment)
+                    @if (comments.ThreadedComments) {
+                        <span> | </span>@Display.CommentReplyButton(ContentPart: comment)
+                    }
+                </div>
+                @Display.CommentText(ContentPart: Model.ContentPart, ContentItem: Model.ContentItem)
+            </div>
+            @Display(children)
+        </div>
+    </li>
+}
+else if (settings.BlogPostLayout == 2) {
+    <li id="comment-@comment.Id" class="comment media">
+        <a href="#" class="pull-left">
+            @Display.CommentGravatar(ContentPart: comment)
+        </a>
+        <div class="media-body">
+            <div class="media-content">
+                <h4 class="media-heading">@Display.CommentAuthor(ContentPart: comment)
+                    <span class="comment-meta">
+                        @Display.CommentMetadata(ContentPart: comment)
+                        @if (comments.ThreadedComments) {
+                            @Display.CommentReplyButton(ContentPart: comment)
+                        }
+                    </span>
+                </h4>
+                @Display.CommentText(ContentPart: Model.ContentPart, ContentItem: Model.ContentItem)
+            </div>
+            @Display(children)
+        </div>
+    </li>
+}
+else if (settings.BlogPostLayout == 3) {
+    <li id="comment-@comment.Id" class="comment media">
+        <a href="#" class="pull-left">
+            @Display.CommentGravatar(ContentPart: comment)
+        </a>
+        <div class="media-body">
+            <div class="media-content well well-sm">
+                <strong>@Display.CommentAuthor(ContentPart: comment)</strong>
+                <span class="comment-meta-date">
+                    @Display.CommentMetadata(ContentPart: comment)
+                </span>
+                <span class="comment-meta-reply">
+                    @if (comments.ThreadedComments) {
+                        @Display.CommentReplyButton(ContentPart: comment)
+                    }
+                </span>
+                <div class="comment-text">
+                    @Display.CommentText(ContentPart: Model.ContentPart, ContentItem: Model.ContentItem)
+                </div>
+            </div>
+            @Display(children)
+        </div>
+    </li>
+}

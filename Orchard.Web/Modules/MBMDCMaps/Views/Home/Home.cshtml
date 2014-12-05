@@ -1,0 +1,51 @@
+﻿@{
+    string[] namearr = new string[] { "http://mbmweb/DCs/RM1-01-RM/MAP-RM1-01-RM.doc", "http://mbmweb/DCs/RIV-04-CA/MAP-RIV-04-CA.doc", "http://mbmweb/DCs/RM2-07-NC/MAP-RM2-07-NC.doc", "http://mbmweb/DCs/ARD-11-AR/MAP-ARD-11-AR.doc", "http://mbmweb/DCs/ELK-14-WI/MAP-ELK-14-WI.doc", "http://mbmweb/DCs/LK5-17-LK/MAP-LK5-17-LK.doc", "http://mbmweb/DCs/MAC-20-MA/MAP-MAC-20-MA.doc", "http://mbmweb/DCs/AB2-27-MD/MAP-AB2-27-MD.doc", "http://mbmweb/DCs/SMN-57-WA/sumnerdirections.docx", "http://mbmweb/DCs/FTW-63-TX/MAP-FT-63-TX.doc", "http://mbmweb/DCs/rm2-07-nc/map-rm2-07-nc.doc", "http://mbmweb/DCs/MT-31/MantecaDirections.xlsx", "http://mbmweb/DCs/lbn-75%20lb/lockbournedirections.docx", "http://mbmweb/DCs/OKC-02-OK/MAP-OKC-02-OK.doc", "http://mbmweb/DCs/COL-05-OH/MAP-COL-05-OH.doc", "http://mbmweb/DCs/LWS-08-LW/MAP-LWS-08-LW.doc", "http://mbmweb/DCs/BAT-12-BA/MAP-BAT-12-BA.doc", "http://mbmweb/DCs/SAL-15-SA/MAP-SAL-15-SA.doc", "http://mbmweb/DCs/NAP-18-NA/MAP-NAP-18-NA.doc", "http://mbmweb/DCs/DEN-21-CO/MAP-DEN-21-CO.doc", "http://mbmweb/DCs/PLS-52-PL/MAP-PLS-52-PL.doc", "http://mbmweb/DCs/LAN-59-PA/MAP-LAN-59-PA.doc", "http://mbmweb/DCs/FUL-70-FU/MAP-FUL-70-FU.doc", "http://mbmweb/DCs/DDDI-84-RV/DDDI-84-RV.doc", "http://mbmweb/DCs/HNC-76-HC/hainescitydirections.docx", "http://mbmweb/DCs/MNT-03-AL/MAP-MNT-03-AL.doc", "http://mbmweb/DCs/LK1-06-FL/MAP-LK1-06-FL.doc", "http://mbmweb/DCs/OL2-09-OL/MAP-OL2-09-OL.doc", "http://mbmweb/DCs/LGR-13-GA/MAP-LGR-13-GA.doc", "http://mbmweb/DCs/TAY-16-TL/MAP-TAY-16-TL.doc", "http://mbmweb/DCs/MSC-19-IA/MAP-MSC-19-IA.doc", "http://mbmweb/DCs/FRK-23-KY/MAP-FRK-23-KY.doc", "http://mbmweb/DCs/ORL-55-OR/MAP-ORL-55-OR.doc", "http://mbmweb/DCs/RAN-61-RA/MAP-RAN-61-RA.doc", "http://mbmweb/DCs/COR-71-CO/MAP-COR-71-CO.doc", "http://mbmweb/DCs/ON-30/OntarioDirections.docx", "http://mbmweb/DCs/nwn-78%20nw/newnandirections.docx" };
+
+
+    string[] linkarr = new string[] { "Rocky Mount-01", "Riverside-04 CA", "Rocky Mount-07 NC", "Ardmore-11 AR", "Elkhorn-14 WI", "Lakeland-17 LK", "Macon-20 MA", "Aberdeen-27 MD", "Sumner-57 WA", "Fort Worth-63 TX", "Centura Hwy-72 RC", "Manteca-31 MT", "Lockbourne-75 LB", "Oklahoma City-02 OK", "Columbus-05 OH", "Lewisville-08 LW", "Battleboro-12 BA", "Salisbury-15 SA", "Napoleon-18 NA", "Denver-21 CO", "Pleasanton-52 PL", "Lancaster-59 PA", "Fullerton-70 FU", "DDDI-84 RV", "Haines City-76 HC", "Montgomery-03 AL", "Lakeland-06 FL", "Orlando-09 OL", "LaGrange-13 GA", "Taylorville-16 TL", "Mason City-19 IA", "Frankfort-23 KY", "Orlando-55 OR", "Rancho-61 RA", "Cordele-71 CR", "Ontario-30 ON", "Newnan-78 NW" };
+}
+
+
+   
+    <style>
+        .square{
+            box-shadow: black 5px 5px;
+            height: 10vh;
+            width: 30vh;
+            background-color: #808080;
+            border: 1px solid black;
+            float: left;
+            margin: 15px;
+            text-align: center;
+            border-radius: 5px
+        }
+        .square:hover {
+            color: white;
+
+        }
+
+    </style>
+
+
+    <div class="contain">
+
+        @{for (var x = 0; x <= namearr.Length - 1; x++)
+        {
+            <a href=@namearr[x]>
+                <div class="square" style="">
+
+                    <div class="inleft" style="height: 9vh; width: 20vh;float:left">
+                        <h3 style="font-size: 2vh">@linkarr[x]</h3>
+                    </div>
+                    <div class="inright" style="height: 9.5vh;width: 8vh;border-left:3px solid black;float: right ">
+                        <span class="glyphicon glyphicon-download-alt" style="margin-top: 3vh"></span>
+                        <p style="font-size: 1.5vh">Download</p>
+
+                    </div>
+
+
+                </div>
+            </a>
+        }
+        }
+    </div>
